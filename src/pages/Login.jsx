@@ -54,6 +54,17 @@ export default function Login() {
         >
           Ingresar
         </button>
+                {/* Mensaje de recuperación de contraseña */}
+        <p style={{
+          marginTop: '10px',
+          fontSize: '14px',
+          textAlign: 'center'
+        }}>
+          ¿Olvidaste tu contraseña?{' '}
+          <a href="/recuperar" style={{ color: '#0d1b2a', textDecoration: 'underline' }}>
+            Haz click aquí
+          </a>
+        </p>
       </form>
     </div>
   );
