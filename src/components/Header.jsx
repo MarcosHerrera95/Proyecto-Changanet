@@ -1,31 +1,48 @@
-export default function Header() {
+import { useNavigate } from 'react-router-dom';
+
+export default function Header({ isAuthPage }) {
+  const navigate = useNavigate();
+
   return (
-    <header style={{
+    <div style={{
       backgroundColor: '#0d1b2a',
-      color: 'white',
       padding: '15px 30px',
       display: 'flex',
       justifyContent: 'space-between',
-      alignItems: 'center',
-      position: 'sticky',
-      top: 0,
-      zIndex: 1000
+      alignItems: 'center'
     }}>
-      <h1 style={{ fontSize: '24px' }}>Changanet</h1>
-      <input
-        type="text"
-        placeholder="Buscar Servicios"
-        style={{
-          padding: '8px 12px',
-          borderRadius: '4px',
-          border: 'none',
-          width: '40%'
-        }}
-      />
-      <div style={{ display: 'flex', gap: '20px' }}>
-        <a href="/login">Ingresar</a>
-        <a href="/register">Registrarse</a>
-      </div>
-    </header>
+      {/* Izquierda: Logo */}
+      <h1
+        style={{ color: 'white', margin: 0, cursor: 'pointer' }}
+        onClick={() => navigate('/')}
+      >
+        Changanet
+      </h1>
+
+      {/* Centro: barra de búsqueda */}
+      {!isAuthPage && (
+        <div style={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}>
+          <input
+            type="text"
+            placeholder="Buscar servicios"
+            style={{
+              padding: '10px',
+              borderRadius: '4px',
+              border: '1px solid #ccc',
+              width: '500px',
+              fontSize: '16px'
+            }}
+          />
+        </div>
+      )}
+
+      {/* Derecha: botones */}
+      {!isAuthPage && (
+        <div style={{ display: 'flex', gap: '20px', marginLeft: '30px' }}>
+          <a href="/login" style={{ color: 'white', textDecoration: 'none' }}>Ingresar</a>
+          <a href="/register" style={{ color: 'white', textDecoration: 'none' }}>Registrarse</a>
+        </div>
+      )}
+    </div>
   );
 }
