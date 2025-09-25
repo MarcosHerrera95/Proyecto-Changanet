@@ -2,11 +2,12 @@ import { useState } from 'react';
 
 export default function Recuperar() {
   const [email, setEmail] = useState('');
+  const [enviado, setEnviado] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setEnviado(true);
     // Acá podrías enviar el email al backend
-    alert(`Se ha enviado un enlace de recuperación a: ${email}`);
   };
 
   return (
@@ -32,38 +33,51 @@ export default function Recuperar() {
         }}
       >
         <h2 style={{ textAlign: 'center' }}>Recuperar contraseña</h2>
-        <p style={{ fontSize: '14px', textAlign: 'center' }}>
-          Ingresá el correo electrónico con el que te registraste. Te enviaremos un enlace para restablecer tu contraseña.
-        </p>
 
-        <input
-          type="email"
-          placeholder="Correo electrónico"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          style={{
-            padding: '10px',
-            borderRadius: '4px',
-            border: '1px solid #ccc'
-          }}
-        />
+        {!enviado ? (
+          <>
+            <p style={{ fontSize: '14px', textAlign: 'center' }}>
+              Ingresá el correo electrónico con el que te registraste. Te enviaremos un enlace para restablecer tu contraseña.
+            </p>
 
-        <button
-          type="submit"
-          style={{
-            padding: '10px',
-            backgroundColor: '#0d1b2a',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: 'pointer',
-            fontWeight: 'bold'
-          }}
-        >
-          Enviar enlace de recuperación
-        </button>
+            <input
+              type="email"
+              placeholder="Correo electrónico"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              style={{
+                padding: '10px',
+                borderRadius: '4px',
+                border: '1px solid #ccc'
+              }}
+            />
+
+            <button
+              type="submit"
+              style={{
+                padding: '10px',
+                backgroundColor: '#0d1b2a',
+                color: 'white',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                fontWeight: 'bold'
+              }}
+            >
+              Enviar enlace de recuperación
+            </button>
+          </>
+        ) : (
+          <div style={{ textAlign: 'center' }}>
+            <p style={{ fontSize: '15px', lineHeight: '1.6' }}>
+              ✅ Se ha enviado un enlace de recuperación a <strong>{email}</strong>.<br />
+              Revisá tu bandeja de entrada o la carpeta de correos no deseados/spam y seguí los pasos para cambiar tu contraseña.
+            </p>
+          </div>
+        )}
       </form>
     </div>
   );
 }
+
