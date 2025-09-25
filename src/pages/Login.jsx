@@ -1,4 +1,8 @@
+import { useNavigate } from 'react-router-dom';
+
 export default function Login() {
+  const navigate = useNavigate();
+
   return (
     <div style={{
       display: 'flex',
@@ -54,17 +58,38 @@ export default function Login() {
         >
           Ingresar
         </button>
-                {/* Mensaje de recuperación de contraseña */}
+
+        {/* Recuperar contraseña */}
         <p style={{
           marginTop: '10px',
           fontSize: '14px',
           textAlign: 'center'
         }}>
-          ¿Olvidaste tu contraseña?{' '}
+          ¿Olvidaste la contraseña?{' '}
           <a href="/recuperar" style={{ color: '#0d1b2a', textDecoration: 'underline' }}>
             Haz click aquí
           </a>
         </p>
+
+        {/* Crear cuenta */}
+        <div style={{ marginTop: '30px', textAlign: 'center' }}>
+          <p style={{ fontSize: '14px' }}>¿No tienes una cuenta?</p>
+          <button
+            type="button"
+            onClick={() => navigate('/register')}
+            style={{
+              padding: '10px 20px',
+              backgroundColor: '#0d1b2a',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              fontWeight: 'bold'
+            }}
+          >
+            Crear cuenta
+          </button>
+        </div>
       </form>
     </div>
   );
