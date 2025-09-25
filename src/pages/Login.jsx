@@ -1,19 +1,27 @@
 export default function Login() {
   return (
-    <div className="container">
-      <h2 style={{ marginBottom: '20px' }}>Iniciar sesión</h2>
+    <div style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: '100vh',
+      backgroundColor: '#f5f5f5'
+    }}>
       <form
         style={{
           display: 'flex',
           flexDirection: 'column',
           gap: '15px',
           maxWidth: '400px',
+          width: '100%',
           backgroundColor: 'white',
-          padding: '20px',
+          padding: '40px',
           borderRadius: '8px',
           boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
         }}
       >
+        <h2 style={{ marginBottom: '20px', textAlign: 'center' }}>Iniciar sesión</h2>
+
         <input
           type="email"
           placeholder="Correo electrónico"
@@ -40,7 +48,8 @@ export default function Login() {
             color: 'white',
             border: 'none',
             borderRadius: '4px',
-            cursor: 'pointer'
+            cursor: 'pointer',
+            fontWeight: 'bold'
           }}
         >
           Ingresar
