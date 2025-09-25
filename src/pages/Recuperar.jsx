@@ -91,7 +91,7 @@ export default function Recuperar() {
                 fontWeight: 'bold'
               }}
             >
-              Volver al inicio
+              Volver al inicio de sesión
             </button>
           </div>
         )}
