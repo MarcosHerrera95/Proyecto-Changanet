@@ -1,20 +1,22 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Restablecer() {
   const [nueva, setNueva] = useState('');
   const [confirmacion, setConfirmacion] = useState('');
-  const [mensaje, setMensaje] = useState('');
+  const [exito, setExito] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (nueva !== confirmacion) {
-      setMensaje('❌ Las contraseñas no coinciden.');
+      alert('❌ Las contraseñas no coinciden.');
       return;
     }
 
     // Simulación de restablecimiento exitoso
-    setMensaje('✅ Tu contraseña ha sido restablecida con éxito.');
+    setExito(true);
   };
 
   return (
@@ -41,53 +43,76 @@ export default function Restablecer() {
       >
         <h2 style={{ textAlign: 'center' }}>Restablecer contraseña</h2>
 
-        <input
-          type="password"
-          placeholder="Nueva contraseña"
-          value={nueva}
-          onChange={(e) => setNueva(e.target.value)}
-          required
-          style={{
-            padding: '10px',
-            borderRadius: '4px',
-            border: '1px solid #ccc'
-          }}
-        />
+        {!exito ? (
+          <>
+            <input
+              type="password"
+              placeholder="Nueva contraseña"
+              value={nueva}
+              onChange={(e) => setNueva(e.target.value)}
+              required
+              style={{
+                padding: '10px',
+                borderRadius: '4px',
+                border: '1px solid #ccc'
+              }}
+            />
 
-        <input
-          type="password"
-          placeholder="Confirmar nueva contraseña"
-          value={confirmacion}
-          onChange={(e) => setConfirmacion(e.target.value)}
-          required
-          style={{
-            padding: '10px',
-            borderRadius: '4px',
-            border: '1px solid #ccc'
-          }}
-        />
+            <input
+              type="password"
+              placeholder="Confirmar nueva contraseña"
+              value={confirmacion}
+              onChange={(e) => setConfirmacion(e.target.value)}
+              required
+              style={{
+                padding: '10px',
+                borderRadius: '4px',
+                border: '1px solid #ccc'
+              }}
+            />
 
-        <button
-          type="submit"
-          style={{
-            padding: '10px',
-            backgroundColor: '#0d1b2a',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: 'pointer',
-            fontWeight: 'bold'
-          }}
-        >
-          Restablecer contraseña
-        </button>
+            <button
+              type="submit"
+              style={{
+                padding: '10px',
+                backgroundColor: '#0d1b2a',
+                color: 'white',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                fontWeight: 'bold'
+              }}
+            >
+              Restablecer contraseña
+            </button>
+          </>
+        ) : (
+          <div style={{ textAlign: 'center' }}>
+            <p style={{ fontSize: '15px', lineHeight: '1.6' }}>
+              ✅ <strong>¡Tu contraseña fue restablecida!</strong><br />
+              Revisá tu bandeja de entrada para confirmar el cambio.
+            </p>
 
-        {mensaje && (
-          <p style={{ textAlign: 'center', marginTop: '10px', fontSize: '14px' }}>
-            {mensaje}
-          </p>
+            <button
+              type="button"
+              onClick={() => navigate('/login')}
+              style={{
+                marginTop: '20px',
+                padding: '10px 20px',
+                backgroundColor: '#0d1b2a',
+                color: 'white',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                fontWeight: 'bold'
+              }}
+            >
+              Volver al inicio de sesión
+            </button>
+          </div>
         )}
       </form>
     </div>
   );
 }
+
