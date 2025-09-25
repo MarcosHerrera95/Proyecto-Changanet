@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Recuperar() {
   const [email, setEmail] = useState('');
   const [enviado, setEnviado] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -72,8 +74,25 @@ export default function Recuperar() {
           <div style={{ textAlign: 'center' }}>
             <p style={{ fontSize: '15px', lineHeight: '1.6' }}>
               ✅ Se ha enviado un enlace de recuperación a <strong>{email}</strong>.<br />
-              Revisá tu bandeja de entrada o la carpeta de correos no deseados/spam y seguí los pasos para cambiar tu contraseña.
+              Revisá tu bandeja de entrada (o la carpeta de correos no deseados/spam) y seguí los pasos para cambiar tu contraseña.
             </p>
+
+            <button
+              type="button"
+              onClick={() => navigate('/login')}
+              style={{
+                marginTop: '20px',
+                padding: '10px 20px',
+                backgroundColor: '#0d1b2a',
+                color: 'white',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                fontWeight: 'bold'
+              }}
+            >
+              Volver al inicio
+            </button>
           </div>
         )}
       </form>
